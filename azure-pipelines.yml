@@ -1,19 +1,35 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  - main
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+
+- checkout: self
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    java -version
+  displayName: 'Check Java'
+
+- script: |
+    liquibase --version
+  displayName: 'Check Liquibase'
+
+- script: |
+    liquibase \
+      --changeLogFile=changelog/db.changelog-master.json \
+      validate
+  displayName: 'Validate Changelog'
+
+- script: |
+    liquibase \
+      --changeLogFile=changelog/db.changelog-master.json \
+      updateSQL
+  displayName: 'Generate SQL'
+
+- script: |
+    liquibase \
+      --changeLogFile=changelog/db.changelog-master.json \
+      update
+  displayName: 'Apply Migration'
