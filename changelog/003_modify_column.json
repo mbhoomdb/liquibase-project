@@ -1,0 +1,19 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "003",
+        "author": "manu",
+        "changes": [
+          {
+            "modifyDataType": {
+              "tableName": "employees",
+              "columnName": "employee_name",
+              "newDataType": "VARCHAR(200)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

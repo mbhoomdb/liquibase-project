@@ -1,0 +1,25 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "002",
+        "author": "manu",
+        "changes": [
+          {
+            "addColumn": {
+              "tableName": "employees",
+              "columns": [
+                {
+                  "column": {
+                    "name": "department",
+                    "type": "VARCHAR(100)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
